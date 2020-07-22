@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <meta name="viewport" content="width=device-width" />
+    <title>
+        Yeşil Dünya
+    </title>
+</head>
+<body>
+    <div class="jumbotron">
+        <div id="demo" class="scratchpad col-xs-12 col-lg-6"></div>
+        <div class="jumbotron">
+            <button type="button" class="btn btn-warning " onclick="$('.scratchpad').wScratchPad('reset');">Yenile</button>
+            <button type="button" class="btn btn-primary acilma" onclick="$('.scratchpad').wScratchPad('clear');">Aç</button>
+            @*<button type="button" class="btn btn-success" onclick="$('.scratchpad').wScratchPad('enable', true);">Açık</button>
+                <button type="button" class="btn btn-danger" onclick="$('.scratchpad').wScratchPad('enable', false);">Kapalı</button>*@
+        </div>
+    </div>
+    <style>
+        #demo {
+            height: 500px;
+            border: solid 1px;
+        }
+
+        @@media (max-width: 300px) {
+            #demo {
+                width: 100%;
+            }
+        }
+    </style>
+    <script type="text/javascript" src="~/js/jquery.1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/wScratchPad.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".acilma").hide();
+            var myArray = [
+                "son.jpg",
+                "son2.png",
+                "son3.png",
+                "son4.png"
+            ];
+            var item = myArray[Math.floor(Math.random() * myArray.length)];
+            console.log(item)
+            $('#demo').wScratchPad({
+                bg: '../images/' + item,
+                fg: '../images/sans.jpg',
+                'cursor': 'url("../images/kilic.png") 5 5, default',
+                scratchMove: function (e, percent) {
+                    console.log(percent);
+                    if (percent > 50) {
+                        $(".acilma").show(1000);
+                    }
+                    if (percent > 60) {
+
+                        this.clear();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
